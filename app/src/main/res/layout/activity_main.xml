@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/log_in"
+                android:onClick="loginUser"
                 android:padding="12dp"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:id="@+id/btn_login"
