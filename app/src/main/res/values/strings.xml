@@ -2,4 +2,6 @@
     <string name="app_name">Daily Shopping</string>
     <string name="no_account">Don\'t have account? Sign up here</string>
     <string name="log_in">Log In</string>
+    <string name="registration">Registration</string>
+    <string name="have_account">Already have account? Sign in here</string>
 </resources>

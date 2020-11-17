@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivty">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,8 +17,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/log_in"
-                android:textColor="@android:color/white"
+                android:text="@string/registration"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:gravity="center"
                 />
@@ -30,7 +29,7 @@
                 android:hint="Email:"
                 android:padding="10dp"
                 android:inputType="textEmailAddress"
-                android:id="@+id/email_login"
+                android:id="@+id/email_reg"
                 />
             <EditText
                 android:layout_width="match_parent"
@@ -39,34 +38,32 @@
                 android:hint="Password:"
                 android:padding="10dp"
                 android:inputType="textPassword"
-                android:id="@+id/password_login"
+                android:id="@+id/password_reg"
                 />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/log_in"
-                android:padding="12dp"
+                android:text="@string/registration"
+                android:padding="6dp"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_reg"
                 />
 
             <TextView
-                android:id="@+id/signup_txt"
+                android:id="@+id/signin_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:onClick="goToSignUp"
+                android:onClick="goToSignIn"
                 android:padding="5dp"
-                android:text="@string/no_account"
+                android:text="@string/have_account"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="#E91E63" />
+                android:textColor="#F44336" />
 
 
         </LinearLayout>
     </ScrollView>
-
-
 
 </LinearLayout>
