@@ -67,10 +67,11 @@ public class RegisterActivty extends AppCompatActivity {
                 mDialog.dismiss();
                 if (task.isSuccessful()){
                     startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                    Toast.makeText(getApplicationContext(),"Successful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Successfully Registered !!",Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Toast.makeText(getApplicationContext(),"Failed..",Toast.LENGTH_SHORT).show();
+                    String error = task.getException().getMessage();
+                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
                 }
 
             }
