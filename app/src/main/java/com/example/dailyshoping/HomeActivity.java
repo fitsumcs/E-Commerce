@@ -1,10 +1,13 @@
 package com.example.dailyshoping;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,10 +21,15 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,8 +42,12 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private RecyclerView recyclerView;
+    RecycleAdapter recycleAdapter;
 
     private TextView totalsumResult;
+    ProgressDialog progressDialog;
+
+    ArrayList<ShopingModle> shope_List = new ArrayList<>();;
 
     //Global variable..
 
@@ -49,7 +61,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        progressDialog = new ProgressDialog(HomeActivity.this);
+
         totalsumResult=findViewById(R.id.total_ammount);
+
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -58,21 +73,67 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
 
-        mDatabase.keepSynced(true);
+        //mDatabase.keepSynced(true);
 
 
         recyclerView=findViewById(R.id.recycler_home);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+
+        //read all Shopping List
+        readAllData();
+
     }
 
     public void addShoppingItem(View view) {
         addShoppingDialog();
+    }
+
+
+
+    private void readAllData() {
+
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.show();
+
+
+
+        shope_List.clear();;
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
+
+                    ShopingModle shopingListModel = snapshot.getValue( ShopingModle.class);
+
+                    shope_List.add(shopingListModel);
+                   // Collections.reverse(shope_List);
+
+                }
+
+                recycleAdapter =  new RecycleAdapter(HomeActivity.this,shope_List);
+
+                recyclerView.setAdapter(recycleAdapter);
+
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getApplicationContext(), "Error",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 
     private void addShoppingDialog() {
@@ -85,6 +146,8 @@ public class HomeActivity extends AppCompatActivity {
         final EditText amount=dialog .findViewById(R.id.edt_ammount);
         final EditText note=dialog .findViewById(R.id.edt_note);
         Button btnSave=dialog .findViewById(R.id.btn_save);
+
+
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
