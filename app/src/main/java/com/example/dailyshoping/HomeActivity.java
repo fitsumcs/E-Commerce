@@ -4,7 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,5 +64,23 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    public void addShoppingItem(View view) {
+        addShoppingDialog();
+    }
+
+    private void addShoppingDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.add_shoping_item);
+        dialog.show();
+
+        final EditText type=dialog .findViewById(R.id.edt_type);
+        final EditText amount=dialog .findViewById(R.id.edt_ammount);
+        final EditText note=dialog .findViewById(R.id.edt_note);
+        Button btnSave=dialog .findViewById(R.id.btn_save);
+
+
     }
 }
