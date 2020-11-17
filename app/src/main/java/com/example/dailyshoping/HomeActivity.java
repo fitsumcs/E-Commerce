@@ -94,12 +94,14 @@ public class HomeActivity extends AppCompatActivity {
                 String mAmount=amount.getText().toString().trim();
                 String mNote=note.getText().toString().trim();
 
-                int ammint=Integer.parseInt(mAmount);
+
 
                 if (TextUtils.isEmpty(mType) || TextUtils.isEmpty(mAmount) || TextUtils.isEmpty(mNote)){
-                    type.setError("All Fields are  Required..");
+                    Toast.makeText(getApplicationContext(),"All Fields are  Required.. ",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                int ammint = Integer.parseInt(mAmount);
 
                 String id= mDatabase.push().getKey();
 
