@@ -84,7 +84,8 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-
+        //Total sum number
+         loadTotalAmount();
         //read all Shopping List
         readAllData();
 
@@ -163,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
 
-                int ammint = Integer.parseInt(mAmount);
+                float ammint = Float.parseFloat(mAmount);
 
                 String id= mDatabase.push().getKey();
 
@@ -194,4 +195,36 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
+    public  void loadTotalAmount()
+    {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                float totalammount = (float) 0.0;
+
+                for (DataSnapshot snap:dataSnapshot.getChildren()){
+
+                    ShopingModle data=snap.getValue(ShopingModle.class);
+
+                    totalammount+=data.getAmount();
+
+                    String sttotal=String.valueOf(totalammount);
+
+                    totalsumResult.setText(sttotal);
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }

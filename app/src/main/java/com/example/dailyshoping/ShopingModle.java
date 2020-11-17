@@ -3,7 +3,7 @@ package com.example.dailyshoping;
 public class ShopingModle {
 
     String type;
-    int amount;
+    float amount;
     String note;
     String date;
     String id;
@@ -12,7 +12,7 @@ public class ShopingModle {
 
     }
 
-    public ShopingModle(String type, int amount, String note, String date, String id) {
+    public ShopingModle(String type, float amount, String note, String date, String id) {
         this.type = type;
         this.amount = amount;
         this.note = note;
@@ -28,11 +28,11 @@ public class ShopingModle {
         this.type = type;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 
