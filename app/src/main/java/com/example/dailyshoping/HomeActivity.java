@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,9 +98,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void readAllData() {
 
-        progressDialog.setMessage("Please Wait...");
-        progressDialog.show();
-
 
 
         shope_List.clear();;
@@ -113,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
                     ShopingModle shopingListModel = snapshot.getValue( ShopingModle.class);
 
                     shope_List.add(shopingListModel);
-                   // Collections.reverse(shope_List);
+                    Collections.reverse(shope_List);
 
                 }
 
@@ -172,9 +171,22 @@ public class HomeActivity extends AppCompatActivity {
 
                 ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
 
-                mDatabase.child(id).setValue(data);
+                mDatabase.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Data Added Successfully !! ",Toast.LENGTH_SHORT).show();
+                            readAllData();
+                        }
+                        else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
-                Toast.makeText(getApplicationContext(),"Data Added Successfully !! ",Toast.LENGTH_SHORT).show();
+
 
                 dialog.dismiss();
             }
