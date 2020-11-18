@@ -34,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mDialog=new ProgressDialog(this);
-
-
 
         email=findViewById(R.id.email_login);
         pass=findViewById(R.id.password_login);
@@ -46,14 +43,6 @@ public class MainActivity extends AppCompatActivity {
         signUp=findViewById(R.id.signup_txt);
 
         mAuth=FirebaseAuth.getInstance();
-
-//        if (mAuth.getCurrentUser()!=null){
-//            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-//        }
-
-
-
-
 
     }
 

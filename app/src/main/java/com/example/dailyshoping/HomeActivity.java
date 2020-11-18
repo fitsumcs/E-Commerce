@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity  implements  OnItemClickedListener{
 
 
 
@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
 
-        //mDatabase.keepSynced(true);
+       mDatabase.keepSynced(true);
 
 
         recyclerView=findViewById(R.id.recycler_home);
@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 }
 
-                recycleAdapter =  new RecycleAdapter(HomeActivity.this,shope_List);
+                recycleAdapter =  new RecycleAdapter(HomeActivity.this,shope_List,HomeActivity.this::onItemClicked);
 
                 recyclerView.setAdapter(recycleAdapter);
 
@@ -262,4 +262,15 @@ public class HomeActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onItemClicked(int position) {
+
+        ShopingModle shopingModle = shope_List.get(position);
+
+        String type=shopingModle.getType();
+        float amount=shopingModle.getAmount();
+        String note=shopingModle.getNote();
+
+
+    }
 }

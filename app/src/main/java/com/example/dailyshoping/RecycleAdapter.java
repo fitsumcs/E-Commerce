@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -18,12 +19,14 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
 
     Context context;
     ArrayList<ShopingModle> shoppingList;
+    private  OnItemClickedListener m_onItemClickedListener;
 
-    public RecycleAdapter(Context con, ArrayList<ShopingModle> shoppingList)
+    public RecycleAdapter(Context con, ArrayList<ShopingModle> shoppingList, OnItemClickedListener onItemClickedListener)
     {
 
         this.context = con;
         this.shoppingList = shoppingList;
+        this.m_onItemClickedListener = onItemClickedListener;
 
     }
 
@@ -31,7 +34,7 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
     @Override
     public MyIdeaHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout,parent,false);
-        MyIdeaHandler myIdeaHandler = new MyIdeaHandler(view);
+        MyIdeaHandler myIdeaHandler = new MyIdeaHandler(view,m_onItemClickedListener);
         return myIdeaHandler;
 
     }
@@ -45,16 +48,11 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
         String date = shopeList.getDate();
         String amount =   String.valueOf(shopeList.getAmount());
 
-
-
-
         //set the view
         holder.mType.setText(title);
         holder.mNote.setText(description);
         holder.mDate.setText(date);
         holder.mAmount.setText(amount);
-
-
 
     }
 
@@ -64,19 +62,31 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
         return shoppingList.size();
     }
 
-    public class MyIdeaHandler extends RecyclerView.ViewHolder{
+    public class MyIdeaHandler extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mType;
         TextView mNote;
         TextView mDate;
         TextView mAmount;
+        OnItemClickedListener onItemClickedListener;
 
-        public MyIdeaHandler(@NonNull View myview) {
+        public MyIdeaHandler(@NonNull View myview , OnItemClickedListener onItemClickedListener) {
             super(myview);
            mType   =   myview.findViewById(R.id.type);
            mNote   =   myview.findViewById(R.id.note);
            mDate   =   myview.findViewById(R.id.date);
            mAmount =   myview.findViewById(R.id.amount);
+
+           this.onItemClickedListener = onItemClickedListener;
+
+           myview.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            onItemClickedListener.onItemClicked(getAdapterPosition());
 
         }
     }
