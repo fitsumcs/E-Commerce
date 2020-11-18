@@ -48,11 +48,12 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content">
 
-                    <EditText
+                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_margin="10dp"
-                        android:id="@+id/edt_type_upd"
-                        android:layout_height="wrap_content" />
+                        android:id="@+id/edt_typeUpdate"
+                        android:layout_height="wrap_content"
+                        />
 
                 </RelativeLayout>
 
@@ -85,6 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_margin="10dp"
                         android:id="@+id/edt_ammount_upd"
+                        android:inputType="numberDecimal"
                         android:layout_height="wrap_content" />
 
                 </RelativeLayout>

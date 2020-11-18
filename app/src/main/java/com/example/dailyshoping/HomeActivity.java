@@ -38,8 +38,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity  implements  OnItemClickedListener{
 
@@ -269,13 +271,21 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.update_layout);
         dialog.show();
-        final EditText Vtype = dialog .findViewById(R.id.edt_type_upd);
+
+
+
+        final Spinner Vtype= dialog .findViewById(R.id.edt_typeUpdate);
         final EditText Vamount =dialog .findViewById(R.id.edt_ammount_upd);
         final EditText Vnote =dialog .findViewById(R.id.edt_note_upd);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.shoppingType_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Vtype.setAdapter(adapter);
 
+        List<String> Lines = Arrays.asList(getResources().getStringArray(R.array.shoppingType_array));
 
-        Vtype.setText(type);
+         int spinnerPosition = Lines.indexOf(type);
+        Vtype.setSelection(spinnerPosition);
         Vamount.setText(String.valueOf(amount));
         Vnote.setText(note);
 
@@ -288,10 +298,15 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             @Override
             public void onClick(View view) {
 
-                String mType=Vtype.getText().toString();
+                String mType=Vtype.getSelectedItem().toString();
                 String mAmount=Vamount.getText().toString().trim();
                 String mNote=Vnote.getText().toString().trim();
                 float ammint = Float.parseFloat(mAmount);
+
+                if (TextUtils.isEmpty(mType) || TextUtils.isEmpty(mAmount) || TextUtils.isEmpty(mNote)){
+                    Toast.makeText(getApplicationContext(),"All Fields are  Required.. ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 String date= DateFormat.getDateInstance().format(new Date());
 
