@@ -20,9 +20,6 @@ public class SplashScreen extends AppCompatActivity {
 
         mAuth= FirebaseAuth.getInstance();
 
-
-
-
         //splash screen
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -36,9 +33,6 @@ public class SplashScreen extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     finish();
                 }
-
-
-
             }
         },3000);
     }
