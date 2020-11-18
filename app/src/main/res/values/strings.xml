@@ -19,6 +19,8 @@
         <item>Food</item>
         <item>Drink</item>
         <item>Cloth</item>
+        <item>Book</item>
+        <item>Jewellery</item>
     </string-array>
 
 </resources>
