@@ -47,10 +47,11 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:singleLine="false"
                 android:text="Note"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:id="@+id/note"
                 android:layout_below="@+id/type"
