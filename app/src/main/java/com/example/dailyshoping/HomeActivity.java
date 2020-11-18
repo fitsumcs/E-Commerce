@@ -293,6 +293,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
 
         Button btnUpdate = dialog .findViewById(R.id.btn_SAVE_upd);
+        Button btnDelete = dialog .findViewById(R.id.btn_delete_upd);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,6 +319,18 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             }
         });
 
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mDatabase.child(id).removeValue();
+                readAllData();
+                Toast.makeText(getApplicationContext(),"Data Deleted Successfully !! ",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+        });
 
 
 
