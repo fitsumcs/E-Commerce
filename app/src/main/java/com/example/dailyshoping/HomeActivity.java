@@ -18,8 +18,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -147,10 +149,14 @@ public class HomeActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.add_shoping_item);
         dialog.show();
 
-        final EditText type=dialog .findViewById(R.id.edt_type);
+        final Spinner type= dialog .findViewById(R.id.edt_type);
         final EditText amount=dialog .findViewById(R.id.edt_ammount);
         final EditText note=dialog .findViewById(R.id.edt_note);
         Button btnSave=dialog .findViewById(R.id.btn_save);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.shoppingType_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        type.setAdapter(adapter);
 
 
 
@@ -158,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String mType=type.getText().toString().trim();
+                String mType=type.getSelectedItem().toString();
                 String mAmount=amount.getText().toString().trim();
                 String mNote=note.getText().toString().trim();
 
@@ -217,7 +223,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     String sttotal=String.valueOf(totalammount);
 
-                    totalsumResult.setText(sttotal);
+                    totalsumResult.setText(sttotal + " Birr");
 
                 }
 
