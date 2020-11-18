@@ -183,21 +183,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
 
-                mDatabase.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(getApplicationContext(),"Data Added Successfully !! ",Toast.LENGTH_SHORT).show();
-                            readAllData();
-                        }
-                        else {
-                            String error = task.getException().getMessage();
-                            Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
+                writeToDb(id,data,"Data Added Successfully !! ");
 
 
                 dialog.dismiss();
@@ -270,7 +256,73 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         String type=shopingModle.getType();
         float amount=shopingModle.getAmount();
         String note=shopingModle.getNote();
+        String myId = shopingModle.getId();
+        uppdateDialog(myId ,type,amount,note);
 
 
+
+    }
+
+    private void uppdateDialog( String id,String type, float amount, String note) {
+
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.update_layout);
+        dialog.show();
+        final EditText Vtype = dialog .findViewById(R.id.edt_type_upd);
+        final EditText Vamount =dialog .findViewById(R.id.edt_ammount_upd);
+        final EditText Vnote =dialog .findViewById(R.id.edt_note_upd);
+
+
+
+        Vtype.setText(type);
+        Vamount.setText(String.valueOf(amount));
+        Vnote.setText(note);
+
+
+
+
+        Button btnUpdate = dialog .findViewById(R.id.btn_SAVE_upd);
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String mType=Vtype.getText().toString();
+                String mAmount=Vamount.getText().toString().trim();
+                String mNote=Vnote.getText().toString().trim();
+                float ammint = Float.parseFloat(mAmount);
+
+                String date= DateFormat.getDateInstance().format(new Date());
+
+                ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
+                writeToDb(id,data,"Data Updated Successfully !! ");
+
+                dialog.dismiss();
+
+            }
+        });
+
+
+
+
+    }
+
+    public void writeToDb(String id,ShopingModle data, String type)
+    {
+        mDatabase.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
+                    readAllData();
+                }
+                else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
