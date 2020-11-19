@@ -50,6 +50,8 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     private TextView totalsumResult;
 
+    FloatingActionButton floatingActionButton;
+
     ArrayList<ShopingModle> shope_List = new ArrayList<>();;
 
     //Global variable..
@@ -68,6 +70,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         setContentView(R.layout.activity_home);
 
 
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         totalsumResult=findViewById(R.id.total_ammount);
 
 
@@ -123,11 +126,13 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             loadTotalAmount(new UtilitiesClass().getFormatedDate());
             //read all Shopping List
             readAllData(new UtilitiesClass().getFormatedDate());
+            floatingActionButton.setEnabled(true);
 
 
         }
 
         else {
+            floatingActionButton.setEnabled(false);
             emptyView.setVisibility(View.VISIBLE);
             emptyView.setText("No Internet Connection Click this text when u are connected!!");
             recyclerView.setVisibility(View.GONE);
