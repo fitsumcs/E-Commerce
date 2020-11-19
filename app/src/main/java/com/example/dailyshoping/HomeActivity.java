@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private String note;
     private String post_key;
 
-    TextView emptyView;
+    TextView emptyView, dateTextView;
 
 
     @Override
@@ -85,6 +85,8 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 
         emptyView = (TextView)findViewById(R.id.emptyView);
+        dateTextView = (TextView)findViewById(R.id.currentDate);
+        dateTextView.setText(new UtilitiesClass().getFormatedDate());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
