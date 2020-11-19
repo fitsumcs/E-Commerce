@@ -144,7 +144,9 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
         shope_List.clear();;
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        mDatabase.orderByChild("date").equalTo(new UtilitiesClass().getFormatedDate()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -241,7 +243,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     public  void loadTotalAmount()
     {
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("date").equalTo(new UtilitiesClass().getFormatedDate()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
