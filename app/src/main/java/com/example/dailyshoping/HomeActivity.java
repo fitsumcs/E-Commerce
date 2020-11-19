@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +60,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private String post_key;
 
     TextView emptyView;
-    Spinner mySpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,25 +87,12 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         emptyView = (TextView)findViewById(R.id.emptyView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        mySpinner = (Spinner)findViewById(R.id.tdates);
-
-        new UtilitiesClass().getDates(this,mySpinner);
 
 
 
 
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                readAllData(adapterView.getItemAtPosition(i).toString());
-                loadTotalAmount(adapterView.getItemAtPosition(i).toString());
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
 
 
         loadActivity();
