@@ -97,14 +97,39 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         recyclerView.setHasFixedSize(true);
 
 
-        //Total sum number
-         loadTotalAmount();
-        //read all Shopping List
-        readAllData();
+        loadActivity();
+
+        emptyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(emptyView.getText().toString().equalsIgnoreCase("No Internet Connection Click this text when u are connected!!"))
+                {
+                    loadActivity();
+                }
+            }
+        });
 
 
 
+    }
 
+    public void loadActivity()
+    {
+
+
+        if(new UtilitiesClass().isNetworkAvailable(HomeActivity.this))
+        {
+            //Total sum number
+            loadTotalAmount();
+            //read all Shopping List
+            readAllData();
+        }
+
+        else {
+            emptyView.setVisibility(View.VISIBLE);
+            emptyView.setText("No Internet Connection Click this text when u are connected!!");
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 
     public void addShoppingItem(View view) {
@@ -140,6 +165,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 if(recycleAdapter.getItemCount() == 0)
                 {
+                    emptyView.setText(" No Shopping List Added!!");
                     emptyView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
