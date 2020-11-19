@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/viewRecord"
+        android:icon="@drawable/ic_logout"
+        android:title="View Record"
+        app:showAsAction="never"
+        />
     <item android:id="@+id/logOut"
         android:icon="@drawable/ic_logout"
         android:title="LogOut"
-        app:showAsAction="always"
+        app:showAsAction="never"
         />
 </menu>

@@ -299,6 +299,9 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             case R.id.logOut:
                 logout();
                 break;
+            case R.id.viewRecord:
+                startActivity(new Intent(getApplicationContext(),ShoppingRecord.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
