@@ -181,7 +181,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 String id= mDatabase.push().getKey();
 
-                String date= DateFormat.getDateInstance().format(new Date());
+                String date= new UtilitiesClass().getFormatedDate();
 
                 ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
 
@@ -309,7 +309,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
                     return;
                 }
 
-                String date= DateFormat.getDateInstance().format(new Date());
+                String date= new UtilitiesClass().getFormatedDate();
 
                 ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
                 writeToDb(id,data,"Data Updated Successfully !! ");
