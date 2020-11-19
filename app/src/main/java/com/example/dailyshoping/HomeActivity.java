@@ -67,6 +67,8 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private String note;
     private String post_key;
 
+    TextView emptyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,13 +92,18 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         recyclerView=findViewById(R.id.recycler_home);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 
+        emptyView = (TextView)findViewById(R.id.emptyView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+
 
         //Total sum number
          loadTotalAmount();
         //read all Shopping List
         readAllData();
+
+
+
 
     }
 
@@ -129,6 +136,17 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
                 recycleAdapter =  new RecycleAdapter(HomeActivity.this,shope_List,HomeActivity.this::onItemClicked);
 
                 recyclerView.setAdapter(recycleAdapter);
+
+
+                if(recycleAdapter.getItemCount() == 0)
+                {
+                    emptyView.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }
+                else {
+                    emptyView.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
 
                 progressDialog.dismiss();
 
@@ -213,6 +231,10 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                     totalsumResult.setText(sttotal + " Birr");
 
+                }
+                if(totalammount ==0.0)
+                {
+                    totalsumResult.setText("0.00 Birr");
                 }
 
 
@@ -326,6 +348,8 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 mDatabase.child(id).removeValue();
                 readAllData();
+                //Total sum number
+                loadTotalAmount();
                 Toast.makeText(getApplicationContext(),"Data Deleted Successfully !! ",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
