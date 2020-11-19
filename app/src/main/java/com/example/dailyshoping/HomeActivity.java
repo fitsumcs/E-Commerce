@@ -1,29 +1,25 @@
 package com.example.dailyshoping;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,11 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity  implements  OnItemClickedListener{
@@ -56,7 +50,6 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     RecycleAdapter recycleAdapter;
 
     private TextView totalsumResult;
-    ProgressDialog progressDialog;
 
     ArrayList<ShopingModle> shope_List = new ArrayList<>();;
 
@@ -68,13 +61,13 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private String post_key;
 
     TextView emptyView;
+    Spinner mySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        progressDialog = new ProgressDialog(HomeActivity.this);
 
         totalsumResult=findViewById(R.id.total_ammount);
 
@@ -95,6 +88,25 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         emptyView = (TextView)findViewById(R.id.emptyView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        mySpinner = (Spinner)findViewById(R.id.tdates);
+
+        new UtilitiesClass().getDates(this,mySpinner);
+
+
+
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                readAllData(adapterView.getItemAtPosition(i).toString());
+                loadTotalAmount(adapterView.getItemAtPosition(i).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         loadActivity();
@@ -120,9 +132,11 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         if(new UtilitiesClass().isNetworkAvailable(HomeActivity.this))
         {
             //Total sum number
-            loadTotalAmount();
+            loadTotalAmount(new UtilitiesClass().getFormatedDate());
             //read all Shopping List
-            readAllData();
+            readAllData(new UtilitiesClass().getFormatedDate());
+
+
         }
 
         else {
@@ -138,7 +152,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
 
 
-    private void readAllData() {
+    private void readAllData(String date) {
 
 
 
@@ -146,7 +160,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
 
 
-        mDatabase.orderByChild("date").equalTo(new UtilitiesClass().getFormatedDate()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.orderByChild("date").equalTo(date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -175,8 +189,6 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
                     emptyView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 }
-
-                progressDialog.dismiss();
 
             }
 
@@ -241,9 +253,9 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     }
 
-    public  void loadTotalAmount()
+    public  void loadTotalAmount(String date)
     {
-        mDatabase.orderByChild("date").equalTo(new UtilitiesClass().getFormatedDate()).addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("date").equalTo(date) .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -375,9 +387,9 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             public void onClick(View view) {
 
                 mDatabase.child(id).removeValue();
-                readAllData();
+                readAllData(new UtilitiesClass().getFormatedDate());
                 //Total sum number
-                loadTotalAmount();
+                loadTotalAmount(new UtilitiesClass().getFormatedDate());
                 Toast.makeText(getApplicationContext(),"Data Deleted Successfully !! ",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
@@ -396,7 +408,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
                 if(task.isSuccessful())
                 {
                     Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
-                    readAllData();
+                    readAllData(new UtilitiesClass().getFormatedDate());
                 }
                 else {
                     String error = task.getException().getMessage();
