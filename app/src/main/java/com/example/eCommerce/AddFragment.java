@@ -1,5 +1,7 @@
 package com.example.eCommerce;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,6 +36,8 @@ public class AddFragment extends Fragment {
     private FirebaseAuth mAuth;
     String uId;
 
+    private ProgressDialog mDialog;
+
     public AddFragment() {
         // Required empty public constructor
     }
@@ -43,7 +48,7 @@ public class AddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        mDialog=new ProgressDialog(getContext());
         mAuth= FirebaseAuth.getInstance();
 
         FirebaseUser mUser=mAuth.getCurrentUser();
@@ -93,6 +98,11 @@ public class AddFragment extends Fragment {
                     return;
                 }
 
+
+                mDialog.setMessage("Processing..");
+                mDialog.show();
+
+
                 float ammint = Float.parseFloat(mAmount);
 
                 String date= new UtilitiesClass().getFormatedDate();
@@ -100,7 +110,7 @@ public class AddFragment extends Fragment {
 
                 ProductModel data = new ProductModel(mCatagory, ammint, mTitle, date, uId, mImage);
 
-                writeToDb( id,data,"Data Added Successfully !! ");
+                writeToDb( id,data,"Product Added Successfully !! ");
 
 
             }
@@ -113,6 +123,7 @@ public class AddFragment extends Fragment {
         mDatabase.child(regId).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                mDialog.dismiss();
                 if(task.isSuccessful())
                 {
                     Toast.makeText(getContext(),type,Toast.LENGTH_SHORT).show();
