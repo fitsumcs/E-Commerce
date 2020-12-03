@@ -89,7 +89,6 @@
                 android:layout_margin="10dp"
                 android:text="@string/registr"
                 android:padding="6dp"
-                android:onClick="registerUser"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:id="@+id/btn_reg"
                 />
