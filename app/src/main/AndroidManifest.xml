@@ -23,7 +23,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.eCommerce.HomeActivity"/>
         </activity>
-        <activity android:name="com.example.eCommerce.MainActivity"></activity>
     </application>
 
 </manifest>
