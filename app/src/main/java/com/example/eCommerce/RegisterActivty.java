@@ -38,7 +38,7 @@ public class RegisterActivty extends AppCompatActivity {
         setContentView(R.layout.activity_register_activty);
 
         firebaseAuth= FirebaseAuth.getInstance();
-        usersDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        usersDatabase = FirebaseDatabase.getInstance().getReference("E_Users");
 
         mDialog=new ProgressDialog(this);
 
@@ -114,7 +114,7 @@ public class RegisterActivty extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(RegisterActivty.this,"Successfully Registered You can Login!!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivty.this,"Successfully Registered !!",Toast.LENGTH_SHORT).show();
                                 ed_fName.setText("");
                                 ed_lName.setText("");
                                 ed_email.setText("");

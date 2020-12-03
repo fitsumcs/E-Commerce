@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
                 if(recycleAdapter.getItemCount() == 0)
                 {
-                    emptyView.setText(" No Shopping List Added!!");
+                    emptyView.setText(" No Product Posted!!");
                     emptyView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
