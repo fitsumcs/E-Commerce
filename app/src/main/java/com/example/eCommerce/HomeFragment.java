@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     private RecyclerView recyclerView;
     RecycleAdapter recycleAdapter;
     TextView emptyView;
+    SearchView searchView;
 
     ArrayList<ProductModel> product_List = new ArrayList<>();;
 
@@ -66,6 +69,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
 
         emptyView = (TextView)view.findViewById(R.id.emptyView);
+        searchView = (SearchView) view.findViewById(R.id.search_Item);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
@@ -78,6 +82,20 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
                 {
                     loadActivity();
                 }
+            }
+        });
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                recycleAdapter.getFilter().filter(s);
+                return false;
             }
         });
 

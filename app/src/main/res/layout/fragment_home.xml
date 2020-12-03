@@ -36,7 +36,7 @@
                         android:layout_weight="2">
 
                         <androidx.appcompat.widget.SearchView
-                            android:id="@+id/currentDate"
+                            android:id="@+id/search_Item"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="10dp"

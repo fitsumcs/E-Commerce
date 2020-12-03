@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaHandler>  implements Filterable {
 
@@ -74,8 +76,48 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
 
     @Override
     public Filter getFilter() {
-        return null;
+        return myFilteredItem ;
     }
+
+    //filter
+    private  Filter myFilteredItem = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<ProductModel> filterList = new ArrayList<>();
+
+            if(charSequence == null || charSequence.length()==0)
+            {
+                filterList.addAll(copy_productList);
+            }
+            else{
+                String fillterPattern = charSequence.toString().toLowerCase();
+                for (ProductModel item: copy_productList)
+                {
+                    if(item.getNote().toLowerCase().contains(fillterPattern))
+                    {
+                        filterList.add(item);
+                    }
+                }
+
+
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filterList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+            productList.clear();
+            productList.addAll((Collection<? extends ProductModel>) filterResults.values);
+            notifyDataSetChanged();
+
+
+        }
+    };
 
     public class MyIdeaHandler extends RecyclerView.ViewHolder implements View.OnClickListener {
 
