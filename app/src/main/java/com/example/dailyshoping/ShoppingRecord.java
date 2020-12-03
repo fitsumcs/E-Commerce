@@ -37,7 +37,7 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
 
     private TextView totalsumResult;
 
-    ArrayList<ShopingModle> shope_List = new ArrayList<>();;
+    ArrayList<ProductModel> shope_List = new ArrayList<>();;
 
     //Global variable..
 
@@ -153,7 +153,7 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
 
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
 
-                    ShopingModle shopingListModel = snapshot.getValue( ShopingModle.class);
+                    ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
 
                     shope_List.add(shopingListModel);
                     Collections.reverse(shope_List);
@@ -200,7 +200,7 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
 
                 for (DataSnapshot snap:dataSnapshot.getChildren()){
 
-                    ShopingModle data=snap.getValue(ShopingModle.class);
+                    ProductModel data=snap.getValue(ProductModel.class);
 
                     totalammount+=data.getAmount();
 

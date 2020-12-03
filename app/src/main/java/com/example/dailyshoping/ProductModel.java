@@ -1,6 +1,6 @@
 package com.example.dailyshoping;
 
-public class ShopingModle {
+public class ProductModel {
 
     String type;
     float amount;
@@ -8,11 +8,11 @@ public class ShopingModle {
     String date;
     String id;
 
-    public ShopingModle(){
+    public ProductModel(){
 
     }
 
-    public ShopingModle(String type, float amount, String note, String date, String id) {
+    public ProductModel(String type, float amount, String note, String date, String id) {
         this.type = type;
         this.amount = amount;
         this.note = note;

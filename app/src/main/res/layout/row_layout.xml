@@ -1,65 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="7dp"
-    app:cardElevation="6dp"
-    android:elevation="6dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="right"
+    >
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView_Pic"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="2dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif-black"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Title of the Item"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView_Catagory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Item Type"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Posted Date"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="Title"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="false"
-                android:justificationMode="inter_word"
-                android:text="Note"
-                android:maxLines="3"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:id="@+id/note"
-                android:layout_below="@+id/type"
-                />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="5000"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textStyle="italic" />
-
-        </RelativeLayout>
 
 
-    </LinearLayout>
 
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -66,7 +66,7 @@ public class UtilitiesClass {
 
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
 
-                    ShopingModle shopingListModel = snapshot.getValue( ShopingModle.class);
+                    ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
 
                    myList.add(shopingListModel.getDate());
                 }

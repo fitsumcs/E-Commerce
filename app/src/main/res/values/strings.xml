@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Daily Shopping</string>
+    <string name="app_name">E Commerce</string>
     <string name="no_account">Don\'t have account? Sign up here</string>
     <string name="log_in">Log In</string>
     <string name="registration">Registration</string>

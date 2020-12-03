@@ -48,11 +48,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private RecyclerView recyclerView;
     RecycleAdapter recycleAdapter;
 
-    private TextView totalsumResult;
-
-    FloatingActionButton floatingActionButton;
-
-    ArrayList<ShopingModle> shope_List = new ArrayList<>();;
+    ArrayList<ProductModel> shope_List = new ArrayList<>();;
 
     //Global variable..
 
@@ -61,17 +57,13 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     private String note;
     private String post_key;
 
-    TextView emptyView, dateTextView;
+    TextView emptyView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-        totalsumResult=findViewById(R.id.total_ammount);
 
 
         mAuth=FirebaseAuth.getInstance();
@@ -88,17 +80,8 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 
         emptyView = (TextView)findViewById(R.id.emptyView);
-        dateTextView = (TextView)findViewById(R.id.currentDate);
-        dateTextView.setText(new UtilitiesClass().getFormatedDate());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
-
-
-
-
-
-
 
         loadActivity();
 
@@ -126,13 +109,11 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
             loadTotalAmount(new UtilitiesClass().getFormatedDate());
             //read all Shopping List
             readAllData(new UtilitiesClass().getFormatedDate());
-            floatingActionButton.setEnabled(true);
 
 
         }
 
         else {
-            floatingActionButton.setEnabled(false);
             emptyView.setVisibility(View.VISIBLE);
             emptyView.setText("No Internet Connection Click this text when u are connected!!");
             recyclerView.setVisibility(View.GONE);
@@ -153,14 +134,14 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
 
 
-        mDatabase.orderByChild("date").equalTo(date).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
 
-                    ShopingModle shopingListModel = snapshot.getValue( ShopingModle.class);
+                    ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
 
                     shope_List.add(shopingListModel);
                     Collections.reverse(shope_List);
@@ -234,7 +215,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 String date= new UtilitiesClass().getFormatedDate();
 
-                ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
+                ProductModel data = new ProductModel(mType,ammint,mNote,date,id);
 
                 writeToDb(id,data,"Data Added Successfully !! ");
 
@@ -248,7 +229,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     public  void loadTotalAmount(String date)
     {
-        mDatabase.orderByChild("date").equalTo(date) .addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -256,18 +237,14 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 for (DataSnapshot snap:dataSnapshot.getChildren()){
 
-                    ShopingModle data=snap.getValue(ShopingModle.class);
+                    ProductModel data=snap.getValue(ProductModel.class);
 
                     totalammount+=data.getAmount();
 
                     String sttotal=String.valueOf(totalammount);
 
-                    totalsumResult.setText(sttotal + " Birr");
 
-                }
-                if(totalammount ==0.0)
-                {
-                    totalsumResult.setText("0.00 Birr");
+
                 }
 
 
@@ -311,12 +288,12 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
     @Override
     public void onItemClicked(int position) {
 
-        ShopingModle shopingModle = shope_List.get(position);
+        ProductModel productModel = shope_List.get(position);
 
-        String type=shopingModle.getType();
-        float amount=shopingModle.getAmount();
-        String note=shopingModle.getNote();
-        String myId = shopingModle.getId();
+        String type= productModel.getType();
+        float amount= productModel.getAmount();
+        String note= productModel.getNote();
+        String myId = productModel.getId();
         uppdateDialog(myId ,type,amount,note);
 
 
@@ -369,7 +346,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
                 String date= new UtilitiesClass().getFormatedDate();
 
-                ShopingModle data = new ShopingModle(mType,ammint,mNote,date,id);
+                ProductModel data = new ProductModel(mType,ammint,mNote,date,id);
                 writeToDb(id,data,"Data Updated Successfully !! ");
 
                 dialog.dismiss();
@@ -396,7 +373,7 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     }
 
-    public void writeToDb(String id,ShopingModle data, String type)
+    public void writeToDb(String id, ProductModel data, String type)
     {
         mDatabase.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
