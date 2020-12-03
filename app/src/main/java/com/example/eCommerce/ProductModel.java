@@ -7,17 +7,27 @@ public class ProductModel {
     String note;
     String date;
     String id;
+    String imageUrl;
 
     public ProductModel(){
 
     }
 
-    public ProductModel(String type, float amount, String note, String date, String id) {
+    public ProductModel(String type, float amount, String note, String date, String id, String imageUrl) {
         this.type = type;
         this.amount = amount;
         this.note = note;
         this.date = date;
         this.id = id;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getType() {

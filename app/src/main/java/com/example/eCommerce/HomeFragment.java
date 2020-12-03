@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         FirebaseUser mUser=mAuth.getCurrentUser();
         String uId=mUser.getUid();
 
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("E_Commerece");
 
         mDatabase.keepSynced(true);
 
