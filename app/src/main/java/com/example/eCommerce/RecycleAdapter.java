@@ -1,9 +1,12 @@
 package com.example.eCommerce;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +17,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaHandler> {
+public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaHandler>  implements Filterable {
 
     Context context;
     ArrayList<ProductModel> productList;
+    ArrayList<ProductModel> copy_productList;
     private  OnItemClickedListener m_onItemClickedListener;
 
     public RecycleAdapter(Context con, ArrayList<ProductModel> productList, OnItemClickedListener onItemClickedListener)
@@ -26,6 +30,8 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
         this.context = con;
         this.productList = productList;
         this.m_onItemClickedListener = onItemClickedListener;
+        this.copy_productList = new ArrayList<>(productList);
+
 
     }
 
@@ -51,6 +57,8 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
         holder.productCatagory.setText(catagory);
         holder.datePublished.setText(date);
 
+        Log.e("Copy Size ", String.valueOf(copy_productList.size()));
+
         //image url
         Glide.with(context)
                 .load("https://www.1datagroup.com/wp-content/uploads/2020/10/ecommerce-solutions.jpg")
@@ -62,6 +70,11 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     public class MyIdeaHandler extends RecyclerView.ViewHolder implements View.OnClickListener {

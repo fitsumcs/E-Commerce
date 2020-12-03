@@ -24,21 +24,9 @@ import java.util.Set;
 public class UtilitiesClass {
 
 
-    private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-
-    public static ArrayList<String> myList = new ArrayList<String>();
-
     public UtilitiesClass() {
 
 
-
-        mAuth= FirebaseAuth.getInstance();
-
-        FirebaseUser mUser=mAuth.getCurrentUser();
-        String uId=mUser.getUid();
-
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Shopping List").child(uId);
     }
     
     
@@ -56,38 +44,6 @@ public class UtilitiesClass {
         return today;
     }
     
-    
-    public  void   getDates(Context context,Spinner spinner)
-    {
 
-        mDatabase.orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
-
-                    ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
-
-                   myList.add(shopingListModel.getDate());
-                }
-
-                Set<String> set = new HashSet<>(myList);
-                myList.clear();
-                myList.addAll(set);
-
-                final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.support_simple_spinner_dropdown_item,myList);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-
-                spinner.setSelection(0);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
 
 }

@@ -45,6 +45,9 @@ public class HomeActivity extends AppCompatActivity  {
                         case R.id.navigation_favourite:
                             openFragment(new FavouriteFragment());
                             return true;
+                        case R.id.navigation_profile:
+                            openFragment(new UserFragment());
+                            return true;
                     }
                     return false;
                 }

@@ -57,11 +57,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
 
 
-        mAuth=FirebaseAuth.getInstance();
-
-        FirebaseUser mUser=mAuth.getCurrentUser();
-        String uId=mUser.getUid();
-
         mDatabase= FirebaseDatabase.getInstance().getReference().child("E_Commerece");
 
         mDatabase.keepSynced(true);

@@ -51,8 +51,14 @@ public class AddFragment extends Fragment {
         mDialog=new ProgressDialog(getContext());
         mAuth= FirebaseAuth.getInstance();
 
-        FirebaseUser mUser=mAuth.getCurrentUser();
-        uId=mUser.getUid();
+
+        if (mAuth.getCurrentUser()!=null)
+        {
+
+            FirebaseUser mUser= mAuth.getCurrentUser();
+            uId = mUser.getUid();
+        }
+
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("E_Commerece");
 
