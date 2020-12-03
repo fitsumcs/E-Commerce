@@ -1,16 +1,18 @@
 package com.example.eCommerce;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,39 +26,35 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedListener{
+
+public class HomeFragment extends Fragment {
 
 
-    private FloatingActionButton fab_btn;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
     private RecyclerView recyclerView;
     RecycleAdapter recycleAdapter;
-
-    private TextView totalsumResult;
+    TextView emptyView;
 
     ArrayList<ProductModel> shope_List = new ArrayList<>();;
 
-    //Global variable..
-
-    private String type;
-    private int amount;
-    private String note;
-    private String post_key;
-
-    TextView emptyView;
-    Spinner mySpinner;
+    public HomeFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_record);
 
+    }
 
-        totalsumResult=findViewById(R.id.total_ammount);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
 
 
         mAuth=FirebaseAuth.getInstance();
@@ -69,32 +67,12 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
         mDatabase.keepSynced(true);
 
 
-        recyclerView=findViewById(R.id.recycler_home);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        recyclerView= view.findViewById(R.id.recycler_home);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
 
-        emptyView = (TextView)findViewById(R.id.emptyView);
+        emptyView = (TextView)view.findViewById(R.id.emptyView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        mySpinner = (Spinner)findViewById(R.id.tdates);
-
-        new UtilitiesClass().getDates(this,mySpinner);
-
-
-
-
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                readAllData(adapterView.getItemAtPosition(i).toString());
-                loadTotalAmount(adapterView.getItemAtPosition(i).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
 
         loadActivity();
 
@@ -108,22 +86,23 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
             }
         });
 
-
-
     }
 
-    public void onItemClicked(int position) {
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    //load data
     public void loadActivity()
     {
 
 
-        if(new UtilitiesClass().isNetworkAvailable(ShoppingRecord.this))
+        if(new UtilitiesClass().isNetworkAvailable(getContext()))
         {
-            //Total sum number
-            loadTotalAmount(new UtilitiesClass().getFormatedDate());
+
             //read all Shopping List
             readAllData(new UtilitiesClass().getFormatedDate());
 
@@ -137,7 +116,6 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
         }
     }
 
-
     private void readAllData(String date) {
 
 
@@ -146,7 +124,7 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
 
 
 
-        mDatabase.orderByChild("date").equalTo(date).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -160,7 +138,7 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
 
                 }
 
-                recycleAdapter =  new RecycleAdapter(ShoppingRecord.this,shope_List);
+                recycleAdapter =  new RecycleAdapter(getContext(),shope_List);
 
                 recyclerView.setAdapter(recycleAdapter);
 
@@ -181,47 +159,11 @@ public class ShoppingRecord extends AppCompatActivity implements  OnItemClickedL
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(getApplicationContext(), "Error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error",Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
     }
-
-
-    public  void loadTotalAmount(String date)
-    {
-        mDatabase.orderByChild("date").equalTo(date) .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                float totalammount = (float) 0.0;
-
-                for (DataSnapshot snap:dataSnapshot.getChildren()){
-
-                    ProductModel data=snap.getValue(ProductModel.class);
-
-                    totalammount+=data.getAmount();
-
-                    String sttotal=String.valueOf(totalammount);
-
-                    totalsumResult.setText(sttotal + " Birr");
-
-                }
-                if(totalammount ==0.0)
-                {
-                    totalsumResult.setText("0.00 Birr");
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
 }

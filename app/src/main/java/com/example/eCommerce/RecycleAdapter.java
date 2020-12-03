@@ -20,12 +20,12 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
     ArrayList<ProductModel> productList;
     private  OnItemClickedListener m_onItemClickedListener;
 
-    public RecycleAdapter(Context con, ArrayList<ProductModel> productList, OnItemClickedListener onItemClickedListener)
+    public RecycleAdapter(Context con, ArrayList<ProductModel> productList)
     {
 
         this.context = con;
         this.productList = productList;
-        this.m_onItemClickedListener = onItemClickedListener;
+        //this.m_onItemClickedListener = onItemClickedListener;
 
     }
 
