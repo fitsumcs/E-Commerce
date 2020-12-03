@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     private RecyclerView recyclerView;
     RecycleAdapter recycleAdapter;
     TextView emptyView;
-    SearchView searchView;
 
     ArrayList<ProductModel> product_List = new ArrayList<>();;
 
@@ -51,6 +54,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -69,7 +73,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
 
         emptyView = (TextView)view.findViewById(R.id.emptyView);
-        searchView = (SearchView) view.findViewById(R.id.search_Item);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
@@ -82,20 +85,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
                 {
                     loadActivity();
                 }
-            }
-        });
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                recycleAdapter.getFilter().filter(s);
-                return false;
             }
         });
 
@@ -188,5 +177,35 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         String title = productModelModle.getNote();
         Toast.makeText(getContext(), title,Toast.LENGTH_SHORT).show();
 
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)searchItem.getActionView();
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+               recycleAdapter.getFilter().filter(s);
+
+                return false;
+            }
+        });
+
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
