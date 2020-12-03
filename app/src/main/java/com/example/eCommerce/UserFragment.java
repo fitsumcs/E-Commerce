@@ -75,7 +75,7 @@ public class UserFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     logout();
-                    new UserFragment();
+                    new UtilitiesClass().openFragment(getContext(), new UserFragment());  ;
 
                 }
             });
@@ -102,6 +102,7 @@ public class UserFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     loginUser();
+
                 }
             });
 
@@ -127,7 +128,7 @@ public class UserFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 mDialog.dismiss();
                 if (task.isSuccessful()){
-                   new UserFragment();
+                    new UtilitiesClass().openFragment(getContext(), new UserFragment());
 
                 }
                 else {

@@ -6,6 +6,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +45,13 @@ public class UtilitiesClass {
         Calendar calendar = Calendar.getInstance();
         String today = simpleDateFormat.format(calendar.getTime());
         return today;
+    }
+
+    public void openFragment(Context context,Fragment fragment) {
+        FragmentTransaction transaction =   ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     
 
