@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnItemClickedListener{
 
 
 
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     RecycleAdapter recycleAdapter;
     TextView emptyView;
 
-    ArrayList<ProductModel> shope_List = new ArrayList<>();;
+    ArrayList<ProductModel> product_List = new ArrayList<>();;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        shope_List.clear();;
+        product_List.clear();;
 
 
 
@@ -133,12 +133,12 @@ public class HomeFragment extends Fragment {
 
                     ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
 
-                    shope_List.add(shopingListModel);
-                    Collections.reverse(shope_List);
+                    product_List.add(shopingListModel);
+                    Collections.reverse(product_List);
 
                 }
 
-                recycleAdapter =  new RecycleAdapter(getContext(),shope_List);
+                recycleAdapter =  new RecycleAdapter(getContext(),product_List,HomeFragment.this::onItemClicked);
 
                 recyclerView.setAdapter(recycleAdapter);
 
@@ -164,6 +164,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+
+        ProductModel productModelModle = product_List.get(position);
+
+        String title = productModelModle.getNote();
+        Toast.makeText(getContext(), title,Toast.LENGTH_SHORT).show();
 
     }
 }

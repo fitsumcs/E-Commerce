@@ -10,11 +10,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyShoping">
-        <activity android:name="com.example.eCommerce.ShoppingRecord">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.eCommerce.HomeActivity" />
-        </activity>
         <activity android:name="com.example.eCommerce.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
