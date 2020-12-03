@@ -37,29 +37,23 @@ public class HomeActivity extends AppCompatActivity  {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            openFragment(new HomeFragment());
+                            new UtilitiesClass().openFragment(HomeActivity.this,new HomeFragment());
                             return true;
                         case R.id.navigation_add:
-                            openFragment(new AddFragment());
+                            new UtilitiesClass().openFragment(HomeActivity.this,new AddFragment());
                             return true;
                         case R.id.navigation_favourite:
-                            openFragment(new FavouriteFragment());
+                            new UtilitiesClass().openFragment(HomeActivity.this,new FavouriteFragment());
                             return true;
                         case R.id.navigation_profile:
-                            openFragment(new UserFragment());
+                            new UtilitiesClass().openFragment(HomeActivity.this,new UserFragment());
                             return true;
                     }
                     return false;
                 }
             };
 
-    //open fragement
-    public void openFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+
 
 
 
