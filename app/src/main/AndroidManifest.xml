@@ -18,7 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.eCommerce.HomeActivity" />
-        <activity android:name="com.example.eCommerce.RegisterActivty" />
+        <activity android:name="com.example.eCommerce.RegisterActivty" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.eCommerce.HomeActivity"/>
+        </activity>
         <activity android:name="com.example.eCommerce.MainActivity"></activity>
     </application>
 

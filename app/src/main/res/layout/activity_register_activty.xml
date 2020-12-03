@@ -26,11 +26,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:hint="First Name:"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/first_reg"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Last Name:"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/last_reg"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:hint="Email:"
                 android:padding="10dp"
                 android:inputType="textEmailAddress"
                 android:id="@+id/email_reg"
                 />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Phone:"
+                android:padding="10dp"
+                android:inputType="phone"
+                android:id="@+id/phone_reg"
+                />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,27 +73,26 @@
                 android:id="@+id/password_reg"
                 />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Confirm Password:"
+                android:padding="10dp"
+                android:inputType="textPassword"
+                android:id="@+id/password_reg2"
+                />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/registration"
+                android:text="@string/registr"
                 android:padding="6dp"
                 android:onClick="registerUser"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:id="@+id/btn_reg"
                 />
-
-            <TextView
-                android:id="@+id/signin_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:onClick="goToSignIn"
-                android:padding="5dp"
-                android:text="@string/have_account"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="#F44336" />
 
 
         </LinearLayout>

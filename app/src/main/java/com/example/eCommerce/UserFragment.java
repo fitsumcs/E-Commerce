@@ -91,6 +91,13 @@ public class UserFragment extends Fragment {
             btnLogin= view.findViewById(R.id.btn_login);
             signUp= view.findViewById(R.id.signup_txt);
 
+            signUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getActivity(),RegisterActivty.class));
+                }
+            });
+
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

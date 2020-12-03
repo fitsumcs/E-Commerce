@@ -22,7 +22,6 @@ public class RegisterActivty extends AppCompatActivity {
 
     private EditText email;
     private EditText pass;
-    private TextView signin;
     private Button btnReg;
 
     private FirebaseAuth mAuth;
@@ -42,13 +41,10 @@ public class RegisterActivty extends AppCompatActivity {
         pass=findViewById(R.id.password_reg);
 
         btnReg=findViewById(R.id.btn_reg);
-        signin=findViewById(R.id.signin_txt);
 
     }
 
-    public void goToSignIn(View view) {
-        startActivity(new Intent(this,MainActivity.class));
-    }
+
 
     public void registerUser(View view) {
         String mEmail=email.getText().toString().trim();
