@@ -1,4 +1,4 @@
-package com.example.dailyshoping;
+package com.example.eCommerce;
 
 import android.os.Bundle;
 import android.view.View;

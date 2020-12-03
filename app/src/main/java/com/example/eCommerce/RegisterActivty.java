@@ -1,4 +1,4 @@
-package com.example.dailyshoping;
+package com.example.eCommerce;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivty extends AppCompatActivity {
 
     private EditText email;
     private EditText pass;
-    private Button btnLogin;
-    private TextView signUp;
+    private TextView signin;
+    private Button btnReg;
 
     private FirebaseAuth mAuth;
 
@@ -32,49 +32,50 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register_activty);
+
+        mAuth= FirebaseAuth.getInstance();
 
         mDialog=new ProgressDialog(this);
 
-        email=findViewById(R.id.email_login);
-        pass=findViewById(R.id.password_login);
+        email=findViewById(R.id.email_reg);
+        pass=findViewById(R.id.password_reg);
 
-        btnLogin=findViewById(R.id.btn_login);
-        signUp=findViewById(R.id.signup_txt);
-
-        mAuth=FirebaseAuth.getInstance();
+        btnReg=findViewById(R.id.btn_reg);
+        signin=findViewById(R.id.signin_txt);
 
     }
 
-    public void goToSignUp(View view) {
-        startActivity(new Intent(this,RegisterActivty.class));
+    public void goToSignIn(View view) {
+        startActivity(new Intent(this,MainActivity.class));
     }
 
-    public void loginUser(View view) {
-
+    public void registerUser(View view) {
         String mEmail=email.getText().toString().trim();
         String mPass=pass.getText().toString().trim();
 
         if (TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPass)){
-            email.setError("All Fields are Required ..");
+            email.setError("All Fields are  Required ..");
             return;
         }
+
         mDialog.setMessage("Processing..");
         mDialog.show();
-        mAuth.signInWithEmailAndPassword(mEmail,mPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(mEmail,mPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 mDialog.dismiss();
                 if (task.isSuccessful()){
                     startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                    Toast.makeText(getApplicationContext(),"Successfully Registered !!",Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                }else {
                     String error = task.getException().getMessage();
                     Toast.makeText(getApplicationContext(),error,Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+
     }
 }

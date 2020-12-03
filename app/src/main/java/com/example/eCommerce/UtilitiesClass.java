@@ -1,4 +1,4 @@
-package com.example.dailyshoping;
+package com.example.eCommerce;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

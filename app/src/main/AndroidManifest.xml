@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dailyshoping">
+    package="com.example.eCommerce">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,21 +10,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyShoping">
-        <activity android:name=".ShoppingRecord">
+        <activity android:name="com.example.eCommerce.ShoppingRecord">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value="com.example.eCommerce.HomeActivity" />
         </activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.example.eCommerce.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".RegisterActivty" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="com.example.eCommerce.HomeActivity" />
+        <activity android:name="com.example.eCommerce.RegisterActivty" />
+        <activity android:name="com.example.eCommerce.MainActivity"></activity>
     </application>
 
 </manifest>

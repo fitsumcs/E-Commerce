@@ -1,4 +1,4 @@
-package com.example.dailyshoping;
+package com.example.eCommerce;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -50,12 +50,6 @@ public class HomeActivity extends AppCompatActivity  implements  OnItemClickedLi
 
     ArrayList<ProductModel> shope_List = new ArrayList<>();;
 
-    //Global variable..
-
-    private String type;
-    private int amount;
-    private String note;
-    private String post_key;
 
     TextView emptyView;
 
