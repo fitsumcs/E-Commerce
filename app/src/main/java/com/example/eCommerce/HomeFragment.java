@@ -174,8 +174,10 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         ProductModel productModelModle = product_List.get(position);
 
-        String title = productModelModle.getNote();
-        Toast.makeText(getContext(), title,Toast.LENGTH_SHORT).show();
+        new UtilitiesClass().openFragment(getContext(),new DetailFragment(productModelModle));
+
+//        String title = productModelModle.getNote();
+//        Toast.makeText(getContext(), title,Toast.LENGTH_SHORT).show();
 
     }
 

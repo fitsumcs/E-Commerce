@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="10dp"
+android:gravity="right"
+tools:context=".DetailFragment"
+    >
+
+<ImageView
+    android:id="@+id/imageView_Pic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_marginBottom="2dp"
+    tools:srcCompat="@tools:sample/avatars" />
+
+<TextView
+    android:id="@+id/textView_Title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:fontFamily="sans-serif-black"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:text="Title of the Item"
+    android:textSize="14sp" />
+
+<TextView
+    android:id="@+id/textView_Catagory"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:fontFamily="sans-serif-medium"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:text="Item Type"
+    android:textSize="14sp" />
+
+<TextView
+    android:id="@+id/textView_Date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:text="Posted Date"
+    android:textSize="12sp"
+    android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView_By"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Posted By"
+        android:textSize="12sp"
+       />
+
+    <TextView
+        android:id="@+id/textView_Phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Phone Number"
+        android:textSize="12sp"
+        />
+
+
+
+
+
+</LinearLayout>
