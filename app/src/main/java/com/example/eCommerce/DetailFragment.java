@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class DetailFragment extends Fragment {
 
-    TextView productCatagory, productTitle, datePublished , userName , userPhone ;
+    TextView productCatagory, productTitle, datePublished , userName , userEmail, userPhone ;
     ImageView imgUrl;
+
+    private DatabaseReference mDatabase;
 
     private  ProductModel productModel;
 
@@ -46,11 +54,16 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("E_Users");
+
+        mDatabase.keepSynced(true);
+
         productCatagory   =   view.findViewById(R.id.textView_Catagory);
         productTitle   =   view.findViewById(R.id.textView_Title);
         datePublished =   view.findViewById(R.id.textView_Date);
         userName =   view.findViewById(R.id.textView_By);
         userPhone =   view.findViewById(R.id.textView_Phone);
+        userEmail=   view.findViewById(R.id.textView_Email);
         imgUrl = view.findViewById(R.id.imageView_Pic);
         
         loadData(productModel);
@@ -65,6 +78,27 @@ public class DetailFragment extends Fragment {
         Glide.with(getContext())
                 .load("https://www.1datagroup.com/wp-content/uploads/2020/10/ecommerce-solutions.jpg")
                 .into(imgUrl);
+
+        // Read from the database
+        mDatabase.child(productModel.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                User user = dataSnapshot.getValue(User.class);
+
+                userName.setText("By  " + user.getUserFirstName() + " " + user.getUserLastName() );
+                userPhone.setText("Phone " + user.getUserPhoneNumber());
+                userEmail.setText("Email "+ user.getUserEmail());
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
 
     }
 
