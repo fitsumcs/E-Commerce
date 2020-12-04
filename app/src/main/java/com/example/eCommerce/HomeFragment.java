@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     RecycleAdapter recycleAdapter;
     TextView emptyView;
     ProgressBar progressBar;
+    SwipeRefreshLayout swipeLayout;
 
     ArrayList<ProductModel> product_List = new ArrayList<>();;
 
@@ -76,6 +78,10 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         emptyView = (TextView)view.findViewById(R.id.emptyView);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
+
+        // Getting SwipeContainerLayout
+        swipeLayout = view.findViewById(R.id.swipe_container);
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
@@ -88,6 +94,15 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
                 {
                     loadActivity();
                 }
+            }
+        });
+
+        //swip listener
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadActivity();
+                swipeLayout.setRefreshing(false);
             }
         });
 
@@ -107,7 +122,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         if(new UtilitiesClass().isNetworkAvailable(getContext()))
         {
-            progressBar.setVisibility(View.VISIBLE);
+
 
             //read all Shopping List
             readAllData(new UtilitiesClass().getFormatedDate());
@@ -124,7 +139,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
     private void readAllData(String date) {
 
-
+        progressBar.setVisibility(View.VISIBLE);
 
         product_List.clear();;
 
