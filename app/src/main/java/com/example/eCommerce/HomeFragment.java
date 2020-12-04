@@ -1,5 +1,6 @@
 package com.example.eCommerce;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,9 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class HomeFragment extends Fragment implements OnItemClickedListener{
@@ -47,6 +45,8 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     TextView emptyView;
     ProgressBar progressBar;
     SwipeRefreshLayout swipeLayout;
+
+
 
     ArrayList<ProductModel> product_List = new ArrayList<>();;
 
@@ -123,10 +123,8 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         if(new UtilitiesClass().isNetworkAvailable(getContext()))
         {
 
-
             //read all Shopping List
-            readAllData(new UtilitiesClass().getFormatedDate());
-
+            readAllData();
 
         }
 
@@ -137,7 +135,8 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         }
     }
 
-    private void readAllData(String date) {
+    //read all data from databse
+    private void readAllData() {
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -157,7 +156,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
                     ProductModel shopingListModel = snapshot.getValue( ProductModel.class);
 
                     product_List.add(shopingListModel);
-                    Collections.reverse(product_List);
 
                 }
 
@@ -224,7 +222,6 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
                 return false;
             }
         });
-
 
         super.onCreateOptionsMenu(menu, inflater);
     }

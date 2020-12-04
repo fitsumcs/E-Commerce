@@ -206,23 +206,25 @@
                             >
 
                             <EditText
-                                android:id="@+id/textView_By"
+                                android:id="@+id/edit_Longitude"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:hint="Product/User Location Longitude"
+                                android:editable="false"
+                                android:hint="Longitude"
                                 android:textSize="12sp"
                                 />
                             <EditText
-                                android:id="@+id/textView_Date"
+                                android:id="@+id/edit_Latitude"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:hint="Product/User Location Latitude"
+                                android:editable="false"
+                                android:hint="Latitude"
                                 android:textSize="12sp"
                                 android:textStyle="italic" />
                         </LinearLayout>
@@ -234,6 +236,7 @@
                             >
 
                             <ImageView
+                                android:id="@+id/imag_getLocation"
                                 android:src="@drawable/ic_add_location"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
@@ -245,11 +248,6 @@
                                 />
 
                         </LinearLayout>
-
-
-
-
-
 
 
                     </LinearLayout>
