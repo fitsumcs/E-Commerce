@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
     private RecyclerView recyclerView;
     RecycleAdapter recycleAdapter;
     TextView emptyView;
+    ProgressBar progressBar;
 
     ArrayList<ProductModel> product_List = new ArrayList<>();;
 
@@ -73,6 +75,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
 
         emptyView = (TextView)view.findViewById(R.id.emptyView);
+        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
@@ -104,6 +107,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         if(new UtilitiesClass().isNetworkAvailable(getContext()))
         {
+            progressBar.setVisibility(View.VISIBLE);
 
             //read all Shopping List
             readAllData(new UtilitiesClass().getFormatedDate());
@@ -129,6 +133,8 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
         mDatabase.orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                progressBar.setVisibility(View.GONE);
 
 
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()) {
