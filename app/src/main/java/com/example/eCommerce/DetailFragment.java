@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,9 +87,14 @@ public class DetailFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
+                String phone = "<font color=#cc0029> " + "Phone " + "</font> <font color=#ffcc00>" + user.getUserPhoneNumber() + "</font>";
+                String email = "<font color=#cc0029> " + "Email " + "</font> <font color=#ffcc00>" + user.getUserEmail() + "</font>";
+                userPhone.setText(Html.fromHtml(phone));
+                userEmail.setText(Html.fromHtml(email));
+
                 userName.setText("By  " + user.getUserFirstName() + " " + user.getUserLastName() );
-                userPhone.setText("Phone " + user.getUserPhoneNumber());
-                userEmail.setText("Email "+ user.getUserEmail());
+                //userPhone.setText("Phone " + user.getUserPhoneNumber());
+                //userEmail.setText("Email "+ user.getUserEmail());
 
 
             }
