@@ -51,7 +51,7 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
 
         ProductModel productModel = productList.get(position);
         String catagory = productModel .getType();
-        String title = productModel .getNote();
+        String title = productModel .getTitle();
         String date = productModel .getDate();
 
         //set the view
@@ -93,7 +93,7 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
                 String fillterPattern = charSequence.toString().toLowerCase();
                 for (ProductModel item: copy_productList)
                 {
-                    if(item.getNote().toLowerCase().contains(fillterPattern))
+                    if(item.getTitle().toLowerCase().contains(fillterPattern))
                     {
                         filterList.add(item);
                     }

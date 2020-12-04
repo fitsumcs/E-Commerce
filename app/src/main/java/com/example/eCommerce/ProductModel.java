@@ -4,30 +4,27 @@ public class ProductModel {
 
     String type;
     float amount;
-    String note;
+    String title;
     String date;
     String id;
     String imageUrl;
 
+    String longitude;
+    String latitude;
     public ProductModel(){
 
     }
 
-    public ProductModel(String type, float amount, String note, String date, String id, String imageUrl) {
+
+    public ProductModel(String type, float amount, String title, String date, String id, String imageUrl, String longitude, String latitude) {
         this.type = type;
         this.amount = amount;
-        this.note = note;
+        this.title = title;
         this.date = date;
         this.id = id;
         this.imageUrl = imageUrl;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public String getType() {
@@ -46,12 +43,12 @@ public class ProductModel {
         this.amount = amount;
     }
 
-    public String getNote() {
-        return note;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {
@@ -68,5 +65,29 @@ public class ProductModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

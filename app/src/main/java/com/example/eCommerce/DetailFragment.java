@@ -71,7 +71,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void loadData(ProductModel productModel) {
-        productTitle.setText(productModel.getNote());
+        productTitle.setText(productModel.getTitle());
         productCatagory.setText(productModel.getType());
         datePublished.setText(productModel.getDate());
 

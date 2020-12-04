@@ -213,7 +213,7 @@
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:editable="false"
-                                android:hint="Longitude"
+                                android:hint="User/Product Longitude"
                                 android:textSize="12sp"
                                 />
                             <EditText
@@ -224,7 +224,7 @@
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:editable="false"
-                                android:hint="Latitude"
+                                android:hint="User/Product Latitude"
                                 android:textSize="12sp"
                                 android:textStyle="italic" />
                         </LinearLayout>

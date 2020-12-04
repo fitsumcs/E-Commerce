@@ -167,8 +167,9 @@ public class AddFragment extends Fragment {
                 String mAmount = ed_amount.getText().toString().trim();
                 String mImage = ed_imagUrl.getText().toString().trim();
 
-                String latitiude = ed_Latitued.getText().toString().trim();
                 String longitude = ed_Longitude.getText().toString().trim();
+                String latitiude = ed_Latitued.getText().toString().trim();
+
 
                 //check empty
                 if (TextUtils.isEmpty(mTitle) || TextUtils.isEmpty(mCatagory) || TextUtils.isEmpty(mAmount) || TextUtils.isEmpty(mImage) || TextUtils.isEmpty(latitiude) || TextUtils.isEmpty(longitude)){
@@ -186,7 +187,7 @@ public class AddFragment extends Fragment {
                 String date= new UtilitiesClass().getFormatedDate();
                 String id= mDatabase.push().getKey();
 
-                ProductModel data = new ProductModel(mCatagory, ammint, mTitle, date, uId, mImage);
+                ProductModel data = new ProductModel(mCatagory, ammint, mTitle, date, uId, mImage,longitude,latitiude);
 
                 writeToDb( id,data,"Product Added Successfully !! ");
 
@@ -205,6 +206,7 @@ public class AddFragment extends Fragment {
                 if(task.isSuccessful())
                 {
                     Toast.makeText(getContext(),type,Toast.LENGTH_SHORT).show();
+                    ed_title.setText("");  ed_amount.setText("");  ed_imagUrl.setText("");  ed_Longitude.setText(""); ed_Latitued.setText("");
                 }
                 else {
                     String error = task.getException().getMessage();
