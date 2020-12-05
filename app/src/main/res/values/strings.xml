@@ -15,10 +15,13 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string-array name="Type_array">
-        <item>Electronics</item>
-        <item>Cloth and Jewellery</item>
-        <item>Furniture and Appliances</item>
-        <item>Land and House</item>
+        <item> Electronics </item>
+        <item> Machinery </item>
+        <item> Vehicle and Transportation </item>
+        <item> Cloth and Jewellery </item>
+        <item> Furniture and Appliances </item>
+        <item> Land and House </item>
+        <item> Other </item>
 
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
