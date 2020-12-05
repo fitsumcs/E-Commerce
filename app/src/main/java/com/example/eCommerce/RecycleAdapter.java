@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaHandler>  implements Filterable {
 
@@ -52,14 +53,13 @@ public class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.MyIdeaH
         ProductModel productModel = productList.get(position);
         String catagory = productModel .getType();
         String title = productModel .getTitle();
-        String date = productModel .getDate();
+        String date =   new UtilitiesClass().getTimeDate(productModel.getTimestamp(true));
 
         //set the view
         holder.productTitle.setText(title);
         holder.productCatagory.setText(catagory);
-        holder.datePublished.setText(date);
+        holder.datePublished.setText( date);
 
-        Log.e("Copy Size ", String.valueOf(copy_productList.size()));
 
         //image url
         Glide.with(context)

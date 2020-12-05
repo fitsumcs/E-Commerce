@@ -1,5 +1,6 @@
 package com.example.eCommerce;
 
+import android.graphics.Path;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -84,6 +85,8 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
 
         loadActivity();
 
@@ -144,7 +147,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
 
 
-        mDatabase.orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.orderByChild("timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

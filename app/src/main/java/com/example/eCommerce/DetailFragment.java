@@ -73,7 +73,7 @@ public class DetailFragment extends Fragment {
     private void loadData(ProductModel productModel) {
         productTitle.setText(productModel.getTitle());
         productCatagory.setText(productModel.getType());
-        datePublished.setText(productModel.getDate());
+        datePublished.setText(new UtilitiesClass().getTimeDate(productModel.getTimestamp(true)));
 
         //image url
         Glide.with(getContext())

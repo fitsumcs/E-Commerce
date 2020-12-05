@@ -21,7 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class UtilitiesClass {
@@ -41,7 +43,7 @@ public class UtilitiesClass {
 
     public  String getFormatedDate()
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");  ;
         Calendar calendar = Calendar.getInstance();
         String today = simpleDateFormat.format(calendar.getTime());
         return today;
@@ -52,6 +54,16 @@ public class UtilitiesClass {
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public  String getTimeDate(long timestamp){
+        try{
+            Date netDate = (new Date(timestamp));
+            SimpleDateFormat sfd = new SimpleDateFormat("E, dd MMM yyyy", Locale.getDefault());
+            return sfd.format(netDate);
+        } catch(Exception e) {
+            return "date";
+        }
     }
     
 

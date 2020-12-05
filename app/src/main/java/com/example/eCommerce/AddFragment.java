@@ -9,12 +9,10 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -30,15 +28,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+
+import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 
 public class AddFragment extends Fragment {
@@ -148,10 +146,10 @@ public class AddFragment extends Fragment {
 
                 float ammint = Float.parseFloat(mAmount);
 
-                String date = new UtilitiesClass().getFormatedDate();
+
                 String id = mDatabase.push().getKey();
 
-                ProductModel data = new ProductModel(mCatagory, ammint, mTitle, date, uId, mImage, longitude, latitiude);
+                ProductModel data = new ProductModel(mCatagory, ammint, mTitle,uId, mImage, longitude, latitiude);
 
                 writeToDb(id, data, "Product Added Successfully !! ");
 
@@ -191,7 +189,7 @@ public class AddFragment extends Fragment {
                     1);
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20, 0, new LocationListener() {
 
 
             @Override

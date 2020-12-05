@@ -1,31 +1,52 @@
 package com.example.eCommerce;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
+
+import java.util.Map;
+
 public class ProductModel {
 
     String type;
     float amount;
     String title;
-    String date;
     String id;
     String imageUrl;
+    Object timestamp;
 
     String longitude;
     String latitude;
+
     public ProductModel(){
 
     }
 
 
-    public ProductModel(String type, float amount, String title, String date, String id, String imageUrl, String longitude, String latitude) {
+    public ProductModel(String type, float amount, String title, String id, String imageUrl, String longitude, String latitude) {
         this.type = type;
         this.amount = amount;
         this.title = title;
-        this.date = date;
         this.id = id;
         this.imageUrl = imageUrl;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.timestamp = ServerValue.TIMESTAMP;
     }
+
+    public Object getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Object timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Exclude
+    public Long getTimestamp(boolean isLong) {
+        if (timestamp instanceof Long) return (Long) timestamp;
+        else return null;
+    }
+
 
     public String getType() {
         return type;
@@ -49,14 +70,6 @@ public class ProductModel {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getId() {
