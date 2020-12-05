@@ -108,12 +108,8 @@ public class AddFragment extends Fragment {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         if (mAuth.getCurrentUser() == null) {
-            bt_addProduct.setEnabled(false);
-            sp_catagory.setEnabled(false);
-            sp_catagory.setClickable(false);
-            ed_title.setFocusable(false);
-            ed_amount.setFocusable(false);
-            ed_imagUrl.setFocusable(false);
+
+            diableUiItems();
             Toast.makeText(getContext(), "Need to Login .. ", Toast.LENGTH_SHORT).show();
         }
 
@@ -233,4 +229,15 @@ public class AddFragment extends Fragment {
                 .create()
                 .show();
     }
+
+    private  void diableUiItems()
+    {
+        bt_addProduct.setEnabled(false);
+        sp_catagory.setEnabled(false);
+        sp_catagory.setClickable(false);
+        ed_title.setFocusable(false);
+        ed_amount.setFocusable(false);
+        ed_imagUrl.setFocusable(false);
+    }
+
 }

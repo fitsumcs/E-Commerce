@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DetailFragment extends Fragment {
 
-    TextView productCatagory, productTitle, datePublished , userName , userEmail, userPhone ;
+    TextView productCatagory, productTitle, datePublished ,productPrice, userName , userEmail, userPhone ;
     ImageView imgUrl;
 
     private DatabaseReference mDatabase;
@@ -61,6 +61,7 @@ public class DetailFragment extends Fragment {
 
         productCatagory   =   view.findViewById(R.id.textView_Catagory);
         productTitle   =   view.findViewById(R.id.textView_Title);
+        productPrice   =   view.findViewById(R.id.textView_Price);
         datePublished =   view.findViewById(R.id.textView_Date);
         userName =   view.findViewById(R.id.textView_By);
         userPhone =   view.findViewById(R.id.textView_Phone);
@@ -75,6 +76,9 @@ public class DetailFragment extends Fragment {
         productCatagory.setText(productModel.getType());
         datePublished.setText(new UtilitiesClass().getTimeDate(productModel.getTimestamp(true)));
 
+        String birr = "</font> <font color=#cdc0b0>"  + productModel.getAmount()  + " Birr" + "</font>";
+        productPrice.setText( Html.fromHtml(birr));
+
         //image url
         Glide.with(getContext())
                 .load("https://www.1datagroup.com/wp-content/uploads/2020/10/ecommerce-solutions.jpg")
@@ -87,14 +91,13 @@ public class DetailFragment extends Fragment {
 
                 User user = dataSnapshot.getValue(User.class);
 
-                String phone = "<font color=#cc0029> " + "Phone " + "</font> <font color=#ffcc00>" + user.getUserPhoneNumber() + "</font>";
-                String email = "<font color=#cc0029> " + "Email " + "</font> <font color=#ffcc00>" + user.getUserEmail() + "</font>";
+                String phone = "</font> <font color=#cc0029>"  + user.getUserPhoneNumber() + "</font>";
+                String email = "</font> <font color=#cc0029>" + user.getUserEmail() + "</font>";
                 userPhone.setText(Html.fromHtml(phone));
                 userEmail.setText(Html.fromHtml(email));
 
                 userName.setText("By  " + user.getUserFirstName() + " " + user.getUserLastName() );
-                //userPhone.setText("Phone " + user.getUserPhoneNumber());
-                //userEmail.setText("Email "+ user.getUserEmail());
+
 
 
             }
