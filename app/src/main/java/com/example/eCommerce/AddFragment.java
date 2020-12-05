@@ -109,6 +109,12 @@ public class AddFragment extends Fragment {
 
         if (mAuth.getCurrentUser() == null) {
             bt_addProduct.setEnabled(false);
+            sp_catagory.setEnabled(false);
+            sp_catagory.setClickable(false);
+            ed_title.setFocusable(false);
+            ed_amount.setFocusable(false);
+            ed_imagUrl.setFocusable(false);
+            Toast.makeText(getContext(), "Need to Login .. ", Toast.LENGTH_SHORT).show();
         }
 
         im_GetLocation.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +195,8 @@ public class AddFragment extends Fragment {
                     1);
             return;
         }
+
+        Toast.makeText(getContext(), "Retriving Location ...",Toast.LENGTH_SHORT).show();
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20, 0, new LocationListener() {
 
 
