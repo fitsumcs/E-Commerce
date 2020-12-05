@@ -22,6 +22,10 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null)
+        {
+            new UtilitiesClass().openFragment(HomeActivity.this,new HomeFragment());
+        }
         setContentView(R.layout.activity_home);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -52,7 +56,6 @@ public class HomeActivity extends AppCompatActivity  {
                     return false;
                 }
             };
-
 
 
 

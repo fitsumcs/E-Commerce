@@ -196,7 +196,7 @@ public class HomeFragment extends Fragment implements OnItemClickedListener{
 
         ProductModel productModelModle = product_List.get(position);
 
-        new UtilitiesClass().openFragment(getContext(),new DetailFragment(productModelModle));
+        new UtilitiesClass().openFragment(getContext(),DetailFragment.getNewInstance(productModelModle));
 
     }
 
