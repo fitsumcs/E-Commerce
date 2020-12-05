@@ -31,6 +31,8 @@ public class DetailFragment extends Fragment {
 
     private  ProductModel productModel;
 
+
+
     public DetailFragment(ProductModel productModel) {
 
         this.productModel = productModel;
