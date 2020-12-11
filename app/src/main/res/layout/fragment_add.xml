@@ -52,6 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:inputType="text"
                         android:id="@+id/edt_title"
                         />
 
@@ -161,6 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:id="@+id/edt_imgUrl"
+                        android:inputType="text"
                          />
 
                 </RelativeLayout>
